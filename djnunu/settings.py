@@ -1,12 +1,13 @@
 import os
 
-
 ################################
 ##     BASE CONFIGURATION     ##
 ################################
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'gbgsg-!tp&cy&8@19mh@&#-1=k#kqg5^f)1=08zsmdy04i!k4c'
+DEBUG = int(os.environ.get('DEBUG', default=0))
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 ################################
@@ -20,6 +21,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'pages.apps.PagesConfig',
 ]
 
 ###############################
@@ -28,6 +30,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # whitenoise 
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -83,19 +86,11 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'assets')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# from .base import *
-
-################################
-##     BASE CONFIGURATION     ##
-################################
-
-DEBUG = int(os.environ.get('DEBUG', default=0))
-
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 ################################
 ##      WSGI CONFIGURATION    ##
