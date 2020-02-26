@@ -5,7 +5,7 @@ import os
 ##     BASE CONFIGURATION     ##
 ################################
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'gbgsg-!tp&cy&8@19mh@&#-1=k#kqg5^f)1=08zsmdy04i!k4c'
 
 
@@ -86,3 +86,41 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# from .base import *
+
+################################
+##     BASE CONFIGURATION     ##
+################################
+
+DEBUG = int(os.environ.get('DEBUG', default=0))
+
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+
+################################
+##      WSGI CONFIGURATION    ##
+################################
+
+WSGI_APPLICATION = 'djnunu.wsgi.application'
+
+################################
+##    DATABASE CONFIGURATION  ##
+################################
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': config('SQL_ENGINE'),
+#         'NAME': config('SQL_DATABASE'),
+#         'USER': config('SQL_USER'),
+#         'PASSWORD': config('SQL_PASSWORD'),
+#         'HOST': config('SQL_HOST'),
+#         'PORT': config('SQL_PORT'),
+#     }
+# }
